@@ -1,5 +1,6 @@
 import {v2} from "cloudinary" 
 import fs from "fs"
+import cloudinary from "cloudinary"
 
 
 cloudinary.config({

@@ -50,7 +50,7 @@ const userSchema=new Schema({
 
 userSchema.pre("save",async function (next) {
     if(!this.isModified("password")) return next();
-    this.password=bcrypt.hash(this.password,10) // bcrypt encrypt kr dega
+    this.password= await bcrypt.hash(this.password,10) // bcrypt encrypt kr dega
     next()
 })
 
