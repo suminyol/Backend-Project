@@ -155,8 +155,8 @@ const logoutUser = asyncHandler( async(req,res)=>{
    User.findByIdAndUpdate(
     req.user._id,
     {
-        $set:{
-            refreshToken:undefined
+        $unset:{
+            refreshToken:1
         }
     },
     {
@@ -258,7 +258,7 @@ const getCurrentUser = asyncHandler( async(req,res)=>{
 const updateAccountDetails = asyncHandler( async(req,res)=>{
     const {fullName,email} = req.body
 
-    if(!fullName||!email){
+    if(!fullName && !email){
         throw new ApiError(400,"All field are required")
     }
     const user = await User.findByIdAndUpdate(
@@ -398,7 +398,7 @@ const getUserChannelProfile = asyncHandler( async(req,res)=>{
         }
     ])
 
-    if(!channel?.length()){
+    if(!channel?.length){
         throw new ApiError(404,"channel does not exist")
     }
 
